@@ -1,1 +1,1 @@
-glory-yang.gihub.io/da5-data-report-glory-yang
+https://info-201a-sp20.github.io/da5-data-report-glory-yang/
