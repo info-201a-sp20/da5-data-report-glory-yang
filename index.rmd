@@ -1,0 +1,56 @@
+---
+title: "2018 US Mass Shootings Report"
+author: "Glory Yang"
+date: "5/16/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+#include for kable
+library(knitr)
+library(leaflet)
+library(htmltools)
+library(plotly)
+source("analysis.R")
+```
+
+## Overview of US Mass Shootings in 2018
+
+According to data gathered by The Gun Violence Archive, in 2018, there were `r num_shootings` mass shootings in the US. View the data [here](http://www.shootingtracker.com/). Out of all the recorded shootings, `r num_deaths` lives were lost. In this report, "impact" on a given location is measured by the sum of the number of people killed or injured. Given that, the US city that was impacted the most in 2018 by mass shootings was `r most_impact_city`, with `r chicago_impact` deaths and injuries. The state with the highest impact was `r most_impact_state` with `r california_impact` deaths and injuries. The states with the most mass shootings were `r highest_freq_states[1]` and `r highest_freq_states[2]`.
+
+## Table of States and Impact Sorted by Number of Deaths
+
+```{r, echo=FALSE}
+kable(shootings_state_df, col.names = c("State", "Deaths", "Injured"))
+```
+
+While California and Illinois had the highest "impact" (total deaths and injuries), the ratio of deaths to injuries vary greatly. This is illustrated by California's 50 deaths and 136 injuries compared to Illinois' 21 deaths and 150 injuries. Additionally, California and Florida had near identical deaths and injuries even though California is two times more populous than Florida. This indicates that there are significant factors other than size that influence sheer death and injury totals.
+
+## Incident Report: `r location`; `r date`
+
+On `r date`, there was a mass shooting in `r location`. The incident occurred at `r address`. The specific longitude was `r longitude`, and the specific latitude was `r latitude`. It resulted in the death of `r deaths` individual and left `r injuries` injured. More information on this incident can be found in the New York Times [here](https://www.nytimes.com/2018/06/17/nyregion/trenton-mass-shooting.html).
+
+## Interactive Map
+
+The purpose of the following map is to help the reader further understand the scope of the mass shootings in the US in 2018 and what areas they occured in.
+
+`r shootings_map`
+
+One notable aspect of this map is that the majority of mass shootings occured on the east side of the country, more highly concentrated on the coasts, which may reflect other important factors not in the data.
+Another notable aspect is that in California, the mass shootings were heavily concentrated in the biggest cities, while on the east side, they were more spread out.
+
+## Seasonal Impact on Incident Frequency
+
+**Question: Does season have an impact on the frequency of mass shooting incidents?**
+
+`r freq_by_date_plot`
+
+Defense: I created this chart to answer the above question, "Does season have an impact on the frequency of mass shooting incidents?". I chose to use a scatter plot to represent this because I thought it would best illustrate the distribution of shootings over time. I also chose to color the points by season so it was clearer to the viewer when a season starts or stops in all the dates.
+
+One insight gained from this chart is that there is significant uptick in daily frequency of mass shootings during the spring and summer, peaking in late spring and early summer. This reflects other important factors not included in the data.
+Another insight is that at least 1 mass shooting occurred almost everyday which emphasizes the severity of this issue.
+
